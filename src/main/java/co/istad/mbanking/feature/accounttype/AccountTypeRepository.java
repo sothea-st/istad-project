@@ -9,4 +9,8 @@ public interface AccountTypeRepository extends JpaRepository<AccountType ,Intege
 
     Optional<AccountType> findByAlias(String alias);
 
+    boolean existsByName(String name);
+
+ 
+
 }
