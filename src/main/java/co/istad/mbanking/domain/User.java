@@ -45,6 +45,9 @@ public class User {
 
     private String profileImage;
 
+    @Column(name = "is_verifies")
+    private Boolean isVerifies;
+
     @Column(length = 20, unique = true)
     private String studentCardId;
 

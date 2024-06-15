@@ -2,8 +2,10 @@ package co.istad.mbanking.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailSendException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
@@ -43,6 +45,14 @@ public class ApiException {
         return ResponseEntity
                 .status(e.getStatusCode())
                 .body(Map.of("error", errorResponse));
+    }
+
+     @ExceptionHandler(MailSendException.class)
+    @ResponseBody
+    public String handleMailSendException(MailSendException ex) {
+        // Log the exception and return a custom error message or handle it accordingly
+        ex.printStackTrace();
+        return "Error sending email: " + ex.getMessage();
     }
 
 }
