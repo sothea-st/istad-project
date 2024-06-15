@@ -25,6 +25,9 @@ public class User {
     @Column(length = 10, nullable = false, unique = true)
     private String phoneNumber;
 
+    @Column(nullable = false,unique = true)
+    private String email;
+
     @Column(length = 4, nullable = false)
     private String pin;
 
@@ -62,5 +65,13 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Account> accounts;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
+    )
+    private List<Role> roles;
 
 }
